@@ -9,4 +9,10 @@
     flex:2;
     margin-right: 10px;
     border-radius: 5px;
+    height: 20px;
+}
+
+#search button{
+    border-radius: 3px;
+    padding: 5px;
 }
