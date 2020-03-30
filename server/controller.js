@@ -26,7 +26,7 @@ module.exports = {
     editJob: (req,res)=>{
         const {id} = req.params;
         const index = jobs.findIndex(val => val.id === +id);
-        jobs[index] = {id, ...req.body};
+        jobs[index] = {id:+id, ...req.body};
         res.status(200).send(jobs);
     },
     addApplicant:(req,res)=>{

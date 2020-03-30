@@ -1,10 +1,13 @@
-import React from 'react'
+import React from 'react';
+import './css/NavBar.css';
 
 const NavBar = () => {
     return (
         <nav>
-            <h3>InDweeb</h3>
-            <h4>Login</h4>
+            <ul id="nav">
+                <li className="nav-left">InDweeb</li>
+                <li className="nav-right">Login</li>
+            </ul>
         </nav>
     )
 }

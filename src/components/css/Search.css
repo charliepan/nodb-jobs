@@ -1,0 +1,12 @@
+#search{
+    margin: 5vh 2vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#search input{
+    flex:2;
+    margin-right: 10px;
+    border-radius: 5px;
+}

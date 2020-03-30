@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './css/JobInputs.css';
 
 export default class JobInputs extends Component {
@@ -11,18 +10,39 @@ export default class JobInputs extends Component {
             companyI:'',
             logoI:'',
             jobDescI:'',
-            rating: props.ExistingRating || Math.floor(Math.random() * Math.floor(100)),
-            applicants: props.ExistingApplicants || 0,
+            rating: props.editingJob.rating ? props.editingJob.rating : Math.floor(Math.random() * Math.floor(100)),
+            applicants: props.editingJob.applicants ? props.editingJob.applicants : 0,
+            applied:props.editingJob.applied ? props.editingJob.applied : 0,
         }
     }
 
-    // componentDidMount(){
-    //     if(this.props.editingPost.id)
-    // }
+    componentDidMount(){
+        if(this.props.editingJob.id){
+            const {job_title, company, logo, job_desc} = this.props.editingJob
+            this.setState({
+                jobTitleI:job_title,
+                companyI:company,
+                logoI:logo,
+                jobDescI:job_desc,
+            })
+        }
+    }
 
     add = ()=>{
-        const {jobTitleI, companyI, logoI, jobDescI} = this.state;
-        this.props.addJob(jobTitleI, companyI, logoI, jobDescI);
+        const {jobTitleI, companyI, logoI, jobDescI, rating, applicants, applied} = this.state;
+        console.log(rating, applicants);
+        this.props.addJob(jobTitleI, companyI, logoI, jobDescI, rating, applicants, applied);
+        this.setState({
+            jobTitleI:'',
+            companyI:'',
+            logoI:'',
+            jobDescI:'',
+        })
+    }
+
+    save = ()=>{
+        const {jobTitleI, companyI, logoI, jobDescI, rating, applicants, applied} = this.state;
+        this.props.saveJob(this.props.editingJob.id,jobTitleI, companyI, logoI, jobDescI, rating, applicants, applied);
         this.setState({
             jobTitleI:'',
             companyI:'',
@@ -45,8 +65,11 @@ export default class JobInputs extends Component {
                     <input type="text" placeholder="Company Name" value={companyI} name="companyI" onChange={(e)=> this.handleChange(e.target)}/>
                     <input type="text" placeholder="Company Logo" value={logoI} name="logoI" onChange={(e)=> this.handleChange(e.target)}/>
                     <textarea type="text" placeholder="Job Description" value={jobDescI} name="jobDescI" onChange={(e)=> this.handleChange(e.target)}/>
-                    <button onClick={()=> this.add()}>Add</button>
-                    <button>Save</button>
+                    {this.props.editingJob.id ? (
+                        <button onClick={()=>this.save()}>Save</button>
+                    ): (
+                        <button onClick={()=> this.add()}>Add</button>
+                    )}
                 </div>
             </div>
             
