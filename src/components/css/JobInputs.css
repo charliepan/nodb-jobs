@@ -1,0 +1,14 @@
+.input-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 45%;
+}
+
+.input-form{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    box-shadow: 0 0 5px #000;
+}
